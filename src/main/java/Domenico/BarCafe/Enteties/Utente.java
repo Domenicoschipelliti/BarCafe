@@ -2,10 +2,7 @@ package Domenico.BarCafe.Enteties;
 
 import Domenico.BarCafe.Enum.Role;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,6 +16,7 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class Utente implements UserDetails {
     @Id
     @GeneratedValue
@@ -31,6 +29,10 @@ public class Utente implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role ruolo;
 
+    @OneToMany(mappedBy = "user")
+    private List<Cibo> ciboList;
+    @OneToMany(mappedBy = "user")
+    private List<Bevande> bevandeList;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(this.ruolo.name()));

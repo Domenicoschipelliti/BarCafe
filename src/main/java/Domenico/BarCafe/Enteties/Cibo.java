@@ -1,11 +1,8 @@
 package Domenico.BarCafe.Enteties;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
+import org.apache.catalina.User;
 
 import java.util.UUID;
 
@@ -14,8 +11,18 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Cibo extends Prodotti{
+@ToString
+public class Cibo{
     @Id
+    @GeneratedValue
     private UUID idCibo;
+    private double costo;
+    private String nomeProdotto;
+    private  String immagine;
+    private String descrizione;
+
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    private Utente user;
 
 }
