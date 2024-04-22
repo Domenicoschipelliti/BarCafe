@@ -29,7 +29,7 @@ public class UtenteService {
     }
 
     public Utente utenteUpdate(UUID userId,Utente body){
-        Utente utente=new Utente();
+        Utente utente=this.uteneById(userId);
         utente.setNome(body.getNome());
         utente.setEmail(body.getEmail());
         utente.setCognome(body.getCognome());
