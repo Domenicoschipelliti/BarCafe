@@ -13,7 +13,7 @@ import java.util.UUID;
 @Repository
 public interface BevandeDAO extends JpaRepository<Bevande, UUID> {
     @Query("SELECT b FROM Bevande b WHERE b.nomeProdotto LIKE %:nomeProdotto%")
-    List<Bevande> listCibo(@Param("nomeProdotto") String nomeProdotto);
+    List<Bevande> listBevande(@Param("nomeProdotto") String nomeProdotto);
 
     @Query("SELECT b FROM Bevande b WHERE  b.costo=costo")
     List<Bevande> BevandeList(@Param("costo")double costo);

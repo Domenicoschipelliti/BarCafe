@@ -2,6 +2,7 @@ package Domenico.BarCafe.Service;
 
 import Domenico.BarCafe.DAO.BevandeDAO;
 import Domenico.BarCafe.Enteties.Bevande;
+import Domenico.BarCafe.Enteties.Cibo;
 import Domenico.BarCafe.Exceptions.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,14 @@ public class BevandeService {
 
     public Bevande findByIdBevande(UUID bevandeId){
         return bevandeDAO.findById(bevandeId).orElseThrow(()->new NotFound(bevandeId));
+    }
+
+    public List<Bevande> foundByDrinksName(String bevanda){
+        return bevandeDAO.listBevande(bevanda);
+    }
+
+    public List<Bevande> foundByCostDrinks(double costo){
+        return bevandeDAO.BevandeList(costo);
     }
 
 

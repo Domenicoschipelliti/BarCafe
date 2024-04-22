@@ -21,6 +21,14 @@ public class CiboService {
      return ciboDAO.findById(ciboId).orElseThrow(()->new NotFound(ciboId));
  }
 
+ public List<Cibo> foundByFoodName(String cibo){
+     return ciboDAO.listCibo(cibo);
+ }
+
+ public List<Cibo> foundByCost(double costo){
+     return ciboDAO.CostoCibo(costo);
+ }
+
 public Cibo ciboPut(UUID ciboId,Cibo body){
      Cibo cibo=this.foundById(ciboId);
      cibo.setCosto(body.getCosto());
