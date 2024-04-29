@@ -9,5 +9,5 @@ import java.util.UUID;
 @Repository
 public interface UtenteDAO extends JpaRepository<Utente, UUID> {
     Optional<Utente> findByEmail(String email);
-    Optional<Utente> findByUserName(String username);
+    Optional<Utente> findByUsername(String username);
 }

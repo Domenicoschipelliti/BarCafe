@@ -49,6 +49,10 @@ public class UtenteService {
         return utenteDAO.findByEmail(email).orElseThrow(()->new NotFound("questa mail non esiste"));
     }
 
+    public Utente findByUserName(String username){
+        return  utenteDAO.findByUsername(username).orElseThrow(()->new NotFound("questo user è già esistente"));
+    }
+
 
 
 

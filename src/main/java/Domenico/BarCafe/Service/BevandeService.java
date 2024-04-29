@@ -46,8 +46,9 @@ public class BevandeService {
 
 
     public void bevandeDelete(UUID bevandeId){
-        Bevande bevande=this.findByIdBevande(bevandeId):
+        Bevande bevande=this.findByIdBevande(bevandeId);
         bevandeDAO.delete(bevande);
     }
+
 
 }
