@@ -16,7 +16,7 @@ public class Jwts {
     public String createToken(Utente user){
         return io.jsonwebtoken.Jwts.builder().subject(String.valueOf(user.getUserId())) // Subject <-- A chi appartiene il token (id dell'utente)
                 .issuedAt(new Date(System.currentTimeMillis())) // Data di emissione (IAT - Issued At)
-                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24 * 7)) // Data di scadenza (Expiration Date)
+                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24 * 8)) // Data di scadenza (Expiration Date)
                 .signWith(Keys.hmacShaKeyFor(jwtsKey.getBytes())) // Firmo il token
                 .compact();
     }
