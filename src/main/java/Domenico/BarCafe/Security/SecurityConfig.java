@@ -3,10 +3,13 @@ package Domenico.BarCafe.Security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,7 +21,9 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
-
+@Configuration
+@EnableMethodSecurity
+@EnableWebSecurity
 public class SecurityConfig {
     @Autowired
     private SecurityFilter securityFilter;
@@ -35,6 +40,7 @@ public class SecurityConfig {
         httpSecurity.authorizeHttpRequests(request -> request.requestMatchers("/**").permitAll());
         return httpSecurity.build();
     }
+
     @Bean
     public FilterRegistrationBean<OpenEntityManagerInViewFilter> openEntityManagerInViewFilter() {
         FilterRegistrationBean<OpenEntityManagerInViewFilter> registrationBean = new FilterRegistrationBean<>();
@@ -43,6 +49,7 @@ public class SecurityConfig {
         registrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE);
         return registrationBean;
     }
+
     @Bean
     PasswordEncoder getPWEncoder() {
         return new BCryptPasswordEncoder(11);
