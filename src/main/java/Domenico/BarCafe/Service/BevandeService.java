@@ -4,9 +4,13 @@ import Domenico.BarCafe.DAO.BevandeDAO;
 import Domenico.BarCafe.Enteties.Bevande;
 import Domenico.BarCafe.Enteties.Cibo;
 import Domenico.BarCafe.Exceptions.NotFound;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,6 +19,9 @@ public class BevandeService {
 
     @Autowired
     private BevandeDAO bevandeDAO;
+
+    @Autowired
+    private Cloudinary cloudinary;
 
 
     public List<Bevande> Alldrinks(){
@@ -50,5 +57,12 @@ public class BevandeService {
         bevandeDAO.delete(bevande);
     }
 
+    public  String uploadImageAvatar(MultipartFile file, UUID userId) throws IOException {
+        Bevande found = this.findByIdBevande(userId);
+        String url = (String) cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap()).get("url");
+        found.setImmagine(url);
+        bevandeDAO.save(found);
+        return url;
+    }
 
 }

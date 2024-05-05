@@ -3,20 +3,27 @@ package Domenico.BarCafe.Service;
 import Domenico.BarCafe.DAO.UtenteDAO;
 import Domenico.BarCafe.Enteties.Utente;
 import Domenico.BarCafe.Exceptions.NotFound;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 
+import java.io.IOException;
 import java.util.UUID;
 
 @Service
 public class UtenteService {
     @Autowired
     private UtenteDAO utenteDAO;
+
+    @Autowired
+    private Cloudinary cloudinary;
 
     public Page<Utente> utentiList(int page, int size, String order){
 
@@ -55,7 +62,13 @@ public class UtenteService {
 
 
 
-
+    public  String uploadImageAvatar(MultipartFile file, UUID userId) throws IOException {
+        Utente found = this.uteneById(userId);
+        String url = (String) cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap()).get("url");
+        found.setAvatar(url);
+        utenteDAO.save(found);
+        return url;
+    }
 
 
 

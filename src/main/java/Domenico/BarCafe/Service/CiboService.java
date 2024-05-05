@@ -2,10 +2,15 @@ package Domenico.BarCafe.Service;
 
 import Domenico.BarCafe.DAO.CiboDAO;
 import Domenico.BarCafe.Enteties.Cibo;
+import Domenico.BarCafe.Enteties.Utente;
 import Domenico.BarCafe.Exceptions.NotFound;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,6 +18,10 @@ import java.util.UUID;
 public class CiboService {
  @Autowired
  private CiboDAO ciboDAO;
+
+ @Autowired
+ private Cloudinary cloudinary;
+
  public List<Cibo> AllFood(){
      return ciboDAO.findAll();
  }
@@ -42,5 +51,14 @@ public void ciboDelete(UUID ciboId){
     Cibo cibo=this.foundById(ciboId);
     ciboDAO.delete(cibo);
 }
+
+    public  String uploadImageAvatar(MultipartFile file, UUID userId) throws IOException {
+        Cibo found = this.foundById(userId);
+        String url = (String) cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap()).get("url");
+        found.setImmagine(url);
+        ciboDAO.save(found);
+        return url;
+    }
+
 
 }
