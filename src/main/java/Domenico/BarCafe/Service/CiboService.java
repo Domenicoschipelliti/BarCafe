@@ -47,6 +47,10 @@ public Cibo ciboPut(UUID ciboId,Cibo body){
      return ciboDAO.save(cibo);
 }
 
+public Cibo ciboSave(Cibo cibo){
+     return ciboDAO.save(cibo);
+}
+
 public void ciboDelete(UUID ciboId){
     Cibo cibo=this.foundById(ciboId);
     ciboDAO.delete(cibo);

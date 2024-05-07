@@ -51,6 +51,10 @@ public class BevandeService {
         return bevandeDAO.save(bevande);
     }
 
+    public Bevande bevandeSave(Bevande bevande){
+        return  bevandeDAO.save(bevande);
+    }
+
 
     public void bevandeDelete(UUID bevandeId){
         Bevande bevande=this.findByIdBevande(bevandeId);
