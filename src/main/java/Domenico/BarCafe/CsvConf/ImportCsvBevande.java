@@ -6,10 +6,11 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.FileReader;
 import java.io.IOException;
-
+@Component
 public class ImportCsvBevande {
     private final BevandeService bevandeService;
 
