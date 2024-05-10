@@ -32,7 +32,7 @@ public class Handler {
 
     @ExceptionHandler(AccessDeniedException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
-    public StandardParameters accessDenied(AccessDeniedException e){
+    public StandardParameters accessDenied(){
         return new StandardParameters("non puoi usare questa cosa per via del tuo ruolo",LocalDate.now());
     }
 
