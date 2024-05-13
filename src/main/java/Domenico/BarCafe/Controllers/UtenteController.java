@@ -30,11 +30,18 @@ public class UtenteController {
         return utenteService.uteneById(userId);
     }
 
+    @GetMapping("/username")
+    public Utente utenteUserName(String username){
+        return utenteService.findByUserName(username);
+    }
+
     @PutMapping("/{userId}")
     @PreAuthorize("hasAuthority('BARISTA')")
     public  Utente utentePut(@PathVariable UUID userId,@RequestBody Utente body){
         return utenteService.utenteUpdate(userId,body);
     }
+
+
 
     @DeleteMapping
     @PreAuthorize("hasAuthority('BARISTA')")
