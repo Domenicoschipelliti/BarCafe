@@ -4,6 +4,7 @@ import Domenico.BarCafe.DAO.CiboDAO;
 import Domenico.BarCafe.Enteties.Cibo;
 import Domenico.BarCafe.Enteties.Utente;
 import Domenico.BarCafe.Exceptions.NotFound;
+import Domenico.BarCafe.Payload.CiboDto;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,18 +52,29 @@ public Cibo ciboSave(Cibo cibo){
      return ciboDAO.save(cibo);
 }
 
+public Cibo ciboPost(CiboDto ciboDto){
+     Cibo newCibo=new Cibo();
+
+     newCibo.setImmagine(ciboDto.immagine());
+     newCibo.setDescrizione(ciboDto.descrizione());
+     newCibo.setCosto(ciboDto.costo());
+     newCibo.setNomeProdotto(ciboDto.nomeProdotto());
+
+     return ciboDAO.save(newCibo);
+ }
+
 public void ciboDelete(UUID ciboId){
     Cibo cibo=this.foundById(ciboId);
     ciboDAO.delete(cibo);
 }
 
-    public  String uploadImageAvatar(MultipartFile file, UUID userId) throws IOException {
-        Cibo found = this.foundById(userId);
+public  String uploadImageAvatar(MultipartFile file, UUID idCibo) throws IOException {
+        Cibo found = this.foundById(idCibo);
         String url = (String) cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap()).get("url");
         found.setImmagine(url);
         ciboDAO.save(found);
         return url;
-    }
+ }
 
 
 }

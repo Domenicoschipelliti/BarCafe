@@ -4,6 +4,7 @@ import Domenico.BarCafe.DAO.BevandeDAO;
 import Domenico.BarCafe.Enteties.Bevande;
 import Domenico.BarCafe.Enteties.Cibo;
 import Domenico.BarCafe.Exceptions.NotFound;
+import Domenico.BarCafe.Payload.BevandaDto;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,8 @@ public class BevandeService {
         return bevandeDAO.findAll();
     }
 
-    public Bevande findByIdBevande(UUID bevandeId){
-        return bevandeDAO.findById(bevandeId).orElseThrow(()->new NotFound(bevandeId));
+    public Bevande findByIdBevande(UUID idBevande){
+        return bevandeDAO.findById(idBevande).orElseThrow(()->new NotFound(idBevande));
     }
 
     public List<Bevande> foundByDrinksName(String bevanda){
@@ -41,8 +42,8 @@ public class BevandeService {
     }
 
 
-    public Bevande bevandePut(UUID bevandeId,Bevande body){
-        Bevande bevande=this.findByIdBevande(bevandeId);
+    public Bevande bevandePut(UUID idBevande,Bevande body){
+        Bevande bevande=this.findByIdBevande(idBevande);
         bevande.setCosto(body.getCosto());
         bevande.setDescrizione(body.getDescrizione());
         bevande.setUser(body.getUser());
@@ -55,14 +56,25 @@ public class BevandeService {
         return  bevandeDAO.save(bevande);
     }
 
+    public Bevande bevandePost(BevandaDto bevandaDto){
+        Bevande newBevande=new Bevande();
 
-    public void bevandeDelete(UUID bevandeId){
-        Bevande bevande=this.findByIdBevande(bevandeId);
+        newBevande.setCosto(bevandaDto.costo());
+        newBevande.setImmagine(bevandaDto.immagine());
+        newBevande.setDescrizione(bevandaDto.descrizione());
+        newBevande.setNomeProdotto(bevandaDto.nomeProdotto());
+
+        return bevandeDAO.save(newBevande);
+    }
+
+
+    public void bevandeDelete(UUID idBevande){
+        Bevande bevande=this.findByIdBevande(idBevande);
         bevandeDAO.delete(bevande);
     }
 
-    public  String uploadImageAvatar(MultipartFile file, UUID userId) throws IOException {
-        Bevande found = this.findByIdBevande(userId);
+    public  String uploadImageAvatar(MultipartFile file, UUID idBevande) throws IOException {
+        Bevande found = this.findByIdBevande(idBevande);
         String url = (String) cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap()).get("url");
         found.setImmagine(url);
         bevandeDAO.save(found);
