@@ -1,5 +1,6 @@
 package Domenico.BarCafe.Enteties;
 
+import Domenico.BarCafe.Exceptions.NotFound;
 import jakarta.persistence.*;
 import lombok.*;
 import org.apache.catalina.User;
