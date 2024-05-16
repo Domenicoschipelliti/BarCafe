@@ -21,8 +21,8 @@ public class SecurityController {
 
     @PostMapping("/login")
     public UserDtoLoginResponse login(@RequestBody UserDtoLogin userDtoLogin){
-        String token=securityService.userResponse(userDtoLogin);
-        return new UserDtoLoginResponse(token);
+        String tokenAccess=securityService.userResponse(userDtoLogin);
+        return new UserDtoLoginResponse(tokenAccess);
     }
 
     @PostMapping("/register")

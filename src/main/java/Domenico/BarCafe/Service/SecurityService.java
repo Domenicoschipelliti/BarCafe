@@ -7,7 +7,7 @@ import Domenico.BarCafe.Exceptions.BadRequest;
 import Domenico.BarCafe.Exceptions.Unauthorized;
 import Domenico.BarCafe.Payload.UserDtoLogin;
 import Domenico.BarCafe.Payload.UserDtoRegister;
-import Domenico.BarCafe.Security.Jwts;
+import Domenico.BarCafe.Security.JwtsClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 public class SecurityService {
 
     @Autowired
-    private Jwts jwts;
+    private JwtsClass jwts;
 
     @Autowired
     private PasswordEncoder passwordEncoder;

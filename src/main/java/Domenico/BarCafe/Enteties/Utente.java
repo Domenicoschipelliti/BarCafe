@@ -39,15 +39,7 @@ public class Utente implements UserDetails {
         return List.of(new SimpleGrantedAuthority(this.ruolo.name()));
     }
 
-    @Override
-    public String getPassword() {
-        return null;
-    }
 
-    @Override
-    public String getUsername() {
-        return null;
-    }
 
     @Override
     public boolean isAccountNonExpired() {

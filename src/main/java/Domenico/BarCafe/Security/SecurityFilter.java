@@ -21,7 +21,7 @@ import java.util.stream.Stream;
 @Component
 public class SecurityFilter extends OncePerRequestFilter {
     @Autowired
-    private Jwts jwts;
+    private JwtsClass jwts;
     @Autowired
     private UtenteService utenteService;
     private static final AntPathMatcher pathMatcher = new AntPathMatcher();
