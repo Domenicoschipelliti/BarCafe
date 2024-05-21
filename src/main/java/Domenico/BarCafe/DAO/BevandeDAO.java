@@ -15,7 +15,7 @@ public interface BevandeDAO extends JpaRepository<Bevande, UUID> {
     @Query("SELECT b FROM Bevande b WHERE b.nomeProdotto LIKE %:nomeProdotto%")
     List<Bevande> listBevande(@Param("nomeProdotto") String nomeProdotto);
 
-    @Query("SELECT b FROM Bevande b WHERE  b.costo=costo")
+    @Query("SELECT b FROM Bevande b WHERE  b.costo=%:costo%")
     List<Bevande> BevandeList(@Param("costo")double costo);
 
 

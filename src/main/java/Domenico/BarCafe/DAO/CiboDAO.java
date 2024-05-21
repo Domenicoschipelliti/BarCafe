@@ -13,6 +13,6 @@ public interface CiboDAO extends JpaRepository<Cibo, UUID> {
    @Query("SELECT c FROM Cibo c WHERE c.nomeProdotto LIKE %:nomeProdotto%")
    List<Cibo> listCibo(@Param("nomeProdotto") String nomeProdotto);
 
-   @Query("SELECT c FROM Cibo c WHERE c.costo=costo")
+   @Query("SELECT c FROM Cibo c WHERE c.costo=%:costo%")
    List<Cibo> CostoCibo(@Param("costo")double costo);
 }

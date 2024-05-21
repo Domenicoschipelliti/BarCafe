@@ -10,6 +10,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -33,6 +34,11 @@ public class UtenteController {
     @GetMapping("/username")
     public Utente utenteUserName(String username){
         return utenteService.findByUserName(username);
+    }
+
+    @GetMapping("/user")
+    public List<Utente> utenteUser(@RequestParam(name = "username")String username){
+        return utenteService.findUser(username);
     }
 
     @PutMapping("/{userId}")
