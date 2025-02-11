@@ -1,7 +1,7 @@
 package Domenico.BarCafe.Controllers;
 
 import Domenico.BarCafe.Enteties.Bevande;
-import Domenico.BarCafe.Enteties.Cibo;
+
 import Domenico.BarCafe.Service.BevandeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,7 +25,7 @@ public class BevandeController {
         return bevandeService.Alldrinks();
     }
 
-    @GetMapping("/idBevande")
+    @GetMapping("/{idBevande}")
     public Bevande bevandeId(@PathVariable UUID idBevande){
         return bevandeService.findByIdBevande(idBevande);
     }

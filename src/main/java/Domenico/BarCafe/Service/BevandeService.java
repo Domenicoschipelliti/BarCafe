@@ -2,7 +2,6 @@ package Domenico.BarCafe.Service;
 
 import Domenico.BarCafe.DAO.BevandeDAO;
 import Domenico.BarCafe.Enteties.Bevande;
-import Domenico.BarCafe.Enteties.Cibo;
 import Domenico.BarCafe.Exceptions.NotFound;
 import Domenico.BarCafe.Payload.BevandaDto;
 import com.cloudinary.Cloudinary;

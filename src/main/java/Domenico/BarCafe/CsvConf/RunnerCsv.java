@@ -18,11 +18,11 @@ public class RunnerCsv implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        String ciboFile="./CSV/Cibo.csv";
-        String bevandeFile="./CSV/Bevande.csv";
+        //String ciboFile="./CSV/Cibo.csv";
+        //String bevandeFile="./CSV/Bevande.csv";
 
-         importCsv.imporFromtCsv(ciboFile);
-         importCsvBevande.importCsvFromBevande(bevandeFile);
+        //importCsv.imporFromtCsv(ciboFile);
+         //importCsvBevande.importCsvFromBevande(bevandeFile);
 
 
     }

@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.UUID;
+
 @Component
 public class ImportCsvBevande {
     private final BevandeService bevandeService;
@@ -26,6 +28,7 @@ public class ImportCsvBevande {
                 String descrizione=csvRecord.get("descrizione");
                 String immagine=csvRecord.get("immagine");
                 double costo=Double.parseDouble(csvRecord.get("costo"));
+
 
                 Bevande bevande=new Bevande();
 
